@@ -1,0 +1,23 @@
+@use '@styles/colors' as *;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+
+  h1 {
+    color: $gold;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+}
+
+.container {
+  max-width: calc(100vw - 4rem);
+  margin: 0 auto;
+}

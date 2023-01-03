@@ -1,0 +1,22 @@
+@use "@styles/colors" as *;
+
+.container {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.status {
+  .indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+    background-color: $red;
+
+    &[data-status="true"]{
+      background-color: $green;
+    }
+  }
+}

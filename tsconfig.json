@@ -16,8 +16,11 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
+      "@app/*": ["src/app/*"],
       "@styles/*": ["styles/*"],
-      "@server/*": ["server/*"]
+      "@server/*": ["server/*"],
+      "@user/*": ["src/user/*"],
+      "@docker/*": ["src/docker/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
