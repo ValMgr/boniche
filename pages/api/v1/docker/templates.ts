@@ -1,15 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { startServer } from '@docker/middlewares/containers';
+import { getTemplates } from '@docker/middlewares/templates';
 import { handler, success, error } from '@app/services/api';
 import { logger } from '@app/services/logger';
 
-const upComposer = async (req: NextApiRequest, res: NextApiResponse) => {
+const availableComposer = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const server = await startServer(req);
-    return success(res)({ success: true, server });
+    const templates = await getTemplates(req);
+    return success(res)({ success: true, templates });
   } catch (e: any) {
-    logger.error('GET /api/v1/docker/start', e?.message);
+    logger.error('GET /api/v1/docker/available', e?.message);
     return error(res, 500)({ error: e?.message });
   }
 };
@@ -19,5 +19,5 @@ export default (req: NextApiRequest, res: NextApiResponse) =>
     req,
     res,
   )({
-    GET: upComposer,
+    GET: availableComposer,
   });

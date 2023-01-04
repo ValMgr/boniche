@@ -1,26 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import path from 'path';
 
+import { listServers } from '@docker/middlewares/containers';
 import { handler, success, error } from '@app/services/api';
-import { ps } from 'docker-compose';
 import { logger } from '@app/services/logger';
 
-type Data = {
-  cwd: string;
-};
-
-const listContainers = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
-  const { p } = req.query;
-
-  if (!p || p === '') {
-    logger.error('GET /api/v1/docker/start', 'No path provided');
-    return error(res, 400)({ error: 'No path provided' });
-  }
-
-  const _path = path.join(path.resolve('./'), '/server/docker-manager/', p as string);
-
+const listContainers = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const containers = await ps({ cwd: _path });
+    const containers = await listServers(req);
     return success(res)({ success: true, containers });
   } catch (e: any) {
     logger.error('GET /api/v1/docker/list', e?.message);
@@ -28,7 +14,7 @@ const listContainers = async (req: NextApiRequest, res: NextApiResponse<Data>) =
   }
 };
 
-export default (req: NextApiRequest, res: NextApiResponse<Data>) =>
+export default (req: NextApiRequest, res: NextApiResponse) =>
   handler(
     req,
     res,

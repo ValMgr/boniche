@@ -1,10 +1,24 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
 import Layout from '@app/components/Layout/Layout';
 
 import '@styles/globals.scss';
 
+
+
 export default function App({ Component, pageProps }: AppProps) {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        retry: false,
+        staleTime: 1000,
+      },
+    },
+  });
+
   return (
     <>
       <Head>
@@ -15,9 +29,12 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name={'google'} content={'nositelinkssearchbox'} />
         <meta name={'google'} content={'notranslate'} />
       </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <QueryClientProvider client={queryClient}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </QueryClientProvider>
+
     </>
   );
 }
