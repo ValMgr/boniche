@@ -2,11 +2,10 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import Layout from '@app/components/Layout/Layout';
+import Layout from '@app/components/Layout';
+import AppProvider from '@app/providers/AppProvider';
 
 import '@styles/globals.scss';
-
-
 
 export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient({
@@ -30,11 +29,12 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name={'google'} content={'notranslate'} />
       </Head>
       <QueryClientProvider client={queryClient}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <AppProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </AppProvider>
       </QueryClientProvider>
-
     </>
   );
 }

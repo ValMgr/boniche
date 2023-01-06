@@ -1,0 +1,46 @@
+@use '@styles/colors' as *;
+
+.container {
+  border-radius: 6px;
+  width: 350px;
+  height: 100%;
+  padding: 1rem;
+  box-shadow: 2px 0 16px 2px rgba(0, 0, 0, 0.29);
+  text-align: center;
+
+  h2 {
+    margin: 0;
+  }
+
+  .serverList {
+    text-align: start;
+    margin-bottom: 1rem;
+
+    .server {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.4rem;
+      width: 100%;
+
+      .serverName {
+        flex-grow: 1;
+        margin-right: 0.5rem;
+      }
+
+      .serverStatus {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: 0 0.5rem;
+
+        &[data-status='online'] {
+          background-color: $green;
+        }
+
+        &[data-status='offline'] {
+          background-color: $red;
+        }
+      }
+    }
+  }
+}

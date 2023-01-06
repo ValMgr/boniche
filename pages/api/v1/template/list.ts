@@ -7,7 +7,7 @@ import { logger } from '@app/services/logger';
 const availableComposer = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const templates = await getTemplates(req);
-    return success(res)({ success: true, templates });
+    return success(res)({templates});
   } catch (e: any) {
     logger.error('GET /api/v1/docker/available', e?.message);
     return error(res, 500)({ error: e?.message });

@@ -1,4 +1,4 @@
-@import '@styles/colors', '@styles/fonts', '@styles/variables';
+@import 'color-themes';
 
 html,
 body {
@@ -12,47 +12,127 @@ body {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: $white;
-    background: $night;
-  }
+a {
+  text-decoration: none;
+  position: relative;
 
-  a {
-    color: $gold;
-    text-decoration: none;
-    position: relative;
-
-    &::after {
-      content: '';
-      display: block;
-      width: 100%;
-      height: 2px;
-      background: $gold;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 250ms ease-in-out;
-    }
-
-    &:hover::after {
-      transform: scaleX(1);
-    }
+  @include themed() {
+    color: t($text);
   }
 
-  button {
-    color: $white;
-    background: $gold;
-    border: none;
-    border-radius: 4px;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: background 250ms ease-in-out;
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 250ms ease-in-out;
+  }
 
-    &:hover {
-      background: $brown;
-    }
+  &:hover::after {
+    transform: scaleX(1);
   }
 }
+
+button {
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: opacity 250ms ease-in-out;
+
+  @include themed() {
+    color: t($text);
+    background: t($secondary);
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+input {
+  border: none;
+  padding: 0.5rem 1rem;
+  transition: border-bottom 250ms ease-in-out;
+}
+
+// // ------------------------------
+// // Light theme
+// // ------------------------------
+
+// @media (prefer-color-scheme: light) {
+//   html {
+//     color-scheme: light;
+//   }
+//   body {
+//     color: $light_text;
+//     background-color: $light_background;
+//   }
+
+//   a {
+//     color: $light_primary;
+
+//     &::after {
+//       background: $light_primary;
+//     }
+//   }
+
+//   button {
+//     color: $light_text;
+//     background: $light_primary;
+//   }
+
+//   input {
+//     color: $light_text;
+//     background: $light_background;
+//     border-bottom: 2px solid $light_primary;
+
+//     &:focus {
+//       border-bottom: 2px solid $light_secondary;
+//     }
+//   }
+// }
+
+// // ------------------------------
+// // Dark theme
+// // ------------------------------
+
+// @media (prefers-color-scheme: dark) {
+//   html {
+//     color-scheme: dark;
+//   }
+//   body {
+//     color: $dark_text;
+//     background-color: $dark_background;
+//   }
+
+//   a {
+//     color: $dark_primary;
+
+//     &::after {
+//       background: $dark_primary;
+//     }
+//   }
+
+//   button {
+//     color: $dark_text;
+//     background: $dark_primary;
+//   }
+
+//   input {
+//     color: $dark_text;
+//     background: $dark_background;
+//     border-bottom: 2px solid $dark_primary;
+
+//     &:focus {
+//       border-bottom: 2px solid $dark_secondary;
+//     }
+//   }
+// }

@@ -7,9 +7,9 @@ import { logger } from '@app/services/logger';
 const listContainers = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const containers = await listServers(req);
-    return success(res)({ success: true, containers });
+    return success(res)({ containers });
   } catch (e: any) {
-    logger.error('GET /api/v1/docker/list', e?.message);
+    logger.error('GET /api/v1/docker/list', e?.mesage);
     return error(res, 500)({ error: e?.message });
   }
 };

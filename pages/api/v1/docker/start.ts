@@ -6,8 +6,8 @@ import { logger } from '@app/services/logger';
 
 const upComposer = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const server = await startServer(req);
-    return success(res)({ success: true, server });
+    const status = await startServer(req);
+    return success(res)({ status });
   } catch (e: any) {
     logger.error('GET /api/v1/docker/start', e?.message);
     return error(res, 500)({ error: e?.message });

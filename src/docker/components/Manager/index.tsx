@@ -1,18 +1,17 @@
-import { useState, useCallback } from 'react';
+import React from 'react';
 
-import styles from '@docker/components/Manager/Manager.module.scss';
-import TemplateSelect from '@docker/components/TemplateSelect';
+import ServerList from '@docker/components/ServerList';
+import CreateServer from '@docker/components/CreateServer';
+
+import styles from '@docker/components/Manager/styles.module.scss';
 
 function Manager() {
-  const [isStarted, setIsStarted] = useState<boolean>(false);
-
-
   return (
     <div className={styles.container}>
-      <TemplateSelect />
-     
-
-      
+      <ServerList />
+      <div className={styles.central_manager}>
+        
+      </div>
     </div>
   );
 }
